@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\ProductController;
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -33,4 +34,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // Test route to confirm the API is working
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working']);
+});
+
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('products', ProductController::class);
 });
